@@ -20,7 +20,7 @@ export const updateRestaurant = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, google_place_id } = req.body;
-    const userId = req.user ? req.user.id : undefined; // Make sure userId is handled correctly
+    const userId = req.user ? req.user.id : undefined;
 
     const [result] = await db.execute(
       'UPDATE restaurants SET name = ?, address = ?, google_place_id = ?, updated_by = ? WHERE id = ?',

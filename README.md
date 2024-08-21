@@ -23,8 +23,8 @@ cd restaurant-review-service
 **create env file as follows**
 ```bash
 DB_HOST=localhost
-DB_USER=your mySQL username
-DB_PASSWORD=your mySQL password
+DB_USER=Your mySQL username
+DB_PASSWORD=Your mySQL password
 DB_NAME=restaurant_reviews
 JWT_SECRET=sdf6erzERfw56qKl
 DB_PORT=3306
