@@ -1,9 +1,9 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const db = require('../config/db');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import db from '../config/db.mjs';
 
-exports.register = async (req, res) => {
-  console.log(req)
+export const register = async (req, res) => {
+  console.log(req);
   try {
     const { name, email, password } = req.body;
 
@@ -23,7 +23,7 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -48,6 +48,6 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
+export const logout = (req, res) => {
   res.status(200).json({ message: 'User logged out successfully' });
 };

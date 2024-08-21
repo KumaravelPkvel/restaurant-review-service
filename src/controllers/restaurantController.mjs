@@ -1,6 +1,6 @@
-const db = require('../config/db');
+import db from '../config/db.mjs';
 
-exports.getRestaurantById = async (req, res) => {
+export const getRestaurantById = async (req, res) => {
   try {
     const { id } = req.params;
     const [restaurant] = await db.execute('SELECT * FROM restaurants WHERE id = ?', [id]);
@@ -16,11 +16,11 @@ exports.getRestaurantById = async (req, res) => {
   }
 };
 
-exports.updateRestaurant = async (req, res) => {
+export const updateRestaurant = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, google_place_id } = req.body;
-    const userId = req.user.id;
+    const userId = req.user ? req.user.id : undefined; // Make sure userId is handled correctly
 
     const [result] = await db.execute(
       'UPDATE restaurants SET name = ?, address = ?, google_place_id = ?, updated_by = ? WHERE id = ?',

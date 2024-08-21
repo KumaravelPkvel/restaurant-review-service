@@ -1,6 +1,6 @@
-const db = require('../config/db');
+import db from '../config/db.mjs';
 
-exports.addReview = async (req, res) => {
+export const addReview = async (req, res) => {
   try {
     const { restaurant_id, rating, comment } = req.body;
     const userId = req.user.id;
@@ -17,7 +17,7 @@ exports.addReview = async (req, res) => {
   }
 };
 
-exports.getReviews = async (req, res) => {
+export const getReviews = async (req, res) => {
   try {
     const { restaurant_id } = req.query;
     const [reviews] = await db.execute('SELECT * FROM reviews WHERE restaurant_id = ?', [restaurant_id]);
