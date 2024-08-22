@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  title: Restaurant Review Service
+  version: 1.0.0
+  description: This collection contains API endpoints for managing users, restaurants, and reviews within the Restaurant Review Service. It allows for user registration, authentication, and the creation, retrieval, and updating of restaurant data and reviews.
+servers:
+  - url: https://3umdj3p4ce.ap-southeast-2.awsapprunner.com
+paths:
+  /api/auth/register:
+    post:
+      summary: Register User
+      description: Endpoint to register a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Kumaravel Ponnusamy1
+                email:
+                  type: string
+                  example: Kumarapkvel1@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '201':
+          description: User registered successfully.
+        '400':
+          description: Bad request, possibly due to invalid input.
+  /api/auth/login:
+    post:
+      summary: Login User
+      description: Endpoint to authenticate a user and return a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: Kumarapkvel1@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Authentication successful, returns JWT token.
+        '401':
+          description: Unauthorized, invalid credentials.
+  /api/restaurants:
+    post:
+      summary: Create Restaurant
+      description: Endpoint to create a new restaurant.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Test Restaurant
+                address:
+                  type: string
+                  example: 123 Main St
+                google_place_id:
+                  type: string
+                  example: test_place_id
+              required:
+                - name
+                - address
+                - google_place_id
+      responses:
+        '201':
+          description: Restaurant created successfully.
+        '400':
+          description: Bad request, possibly due to invalid input.
+      security:
+        - bearerAuth: []
+  /api/restaurants/{id}:
+    get:
+      summary: Get Restaurant
+      description: Endpoint to retrieve details of a specific restaurant by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Restaurant details retrieved successfully.
+        '404':
+          description: Restaurant not found.
+      security:
+        - bearerAuth: []
+    put:
+      summary: Update Restaurant
+      description: Endpoint to update details of a specific restaurant by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Updated Restaurant
+                address:
+                  type: string
+                  example: 456 Main St
+                google_place_id:
+                  type: string
+                  example: updated_place_id
+              required:
+                - name
+                - address
+                - google_place_id
+      responses:
+        '200':
+          description: Restaurant updated successfully.
+        '404':
+          description: Restaurant not found.
+      security:
+        - bearerAuth: []
+  /api/reviews:
+    post:
+      summary: Add Review
+      description: Endpoint to add a new review for a restaurant.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                restaurant_id:
+                  type: integer
+                  example: 1
+                rating:
+                  type: integer
+                  example: 5
+                comment:
+                  type: string
+                  example: Excellent food!
+              required:
+                - restaurant_id
+                - rating
+                - comment
+      responses:
+        '201':
+          description: Review added successfully.
+        '400':
+          description: Bad request, possibly due to invalid input.
+      security:
+        - bearerAuth: []
+    get:
+      summary: Get Reviews
+      description: Endpoint to retrieve all reviews for a specific restaurant.
+      parameters:
+        - name: restaurant_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Reviews retrieved successfully.
+        '404':
+          description: No reviews found for this restaurant.
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
