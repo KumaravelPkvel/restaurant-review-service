@@ -39,3 +39,11 @@ node src/app.mjs
 There is a file called Schema.sql which has all the sql tables to be created please run 
 
 
+### 3. To Run Unit test
+
+**use the following command**
+
+```bash
+npm test
+```
+
