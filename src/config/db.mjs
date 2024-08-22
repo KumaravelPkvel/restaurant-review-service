@@ -1,9 +1,9 @@
 import mysql from 'mysql2';
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "titansk3.c586m84y6h83.ap-southeast-2.rds.amazonaws.com",
+  host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "admin",
-  password: process.env.DB_PASSWORD || "3KTitans",
+  password: process.env.DB_PASSWORD || "admin",
   database: process.env.DB_NAME || "restaurant_reviews",
   port: process.env.DB_PORT || 3306 
 });
