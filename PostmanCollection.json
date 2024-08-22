@@ -1,199 +1,198 @@
 {
-    "info": {
-      "name": "Restaurant Review Service",
-      "_postman_id": "12345-abcdef-67890-ghijk",
-      "description": "API Collection for Restaurant Review Service",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  "info": {
+    "name": "Restaurant Review Service",
+    "_postman_id": "12345-abcdef-67890-ghijk",
+    "description": "This collection contains API endpoints for managing users, restaurants, and reviews within the Restaurant Review Service. It allows for user registration, authentication, and the creation, retrieval, and updating of restaurant data and reviews.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Kumaravel Ponnusamy1\",\n  \"email\": \"Kumarapkvel1@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/auth/register",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "auth", "register"]
+        }
+      },
+      "response": [],
+      "description": "Endpoint to register a new user."
     },
-    "item": [
-      {
-        "name": "Register User",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"Kumarapkvel1@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/auth/login",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "auth", "login"]
+        }
+      },
+      "response": [],
+      "description": "Endpoint to authenticate a user and return a JWT token."
+    },
+    {
+      "name": "Create Restaurant",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
           },
-          "url": {
-            "raw": "http://localhost:5000/api/auth/register",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "auth", "register"]
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
           }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Restaurant\",\n  \"address\": \"123 Main St\",\n  \"google_place_id\": \"test_place_id\"\n}"
         },
-        "response": []
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/restaurants",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "restaurants"]
+        }
       },
-      {
-        "name": "Login User",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+      "response": [],
+      "description": "Endpoint to create a new restaurant."
+    },
+    {
+      "name": "Get Restaurant",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/restaurants/1",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "restaurants", "1"]
+        }
+      },
+      "response": [],
+      "description": "Endpoint to retrieve details of a specific restaurant by its ID."
+    },
+    {
+      "name": "Update Restaurant",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
           },
-          "url": {
-            "raw": "http://localhost:5000/api/auth/login",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "auth", "login"]
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
           }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Restaurant\",\n  \"address\": \"456 Main St\",\n  \"google_place_id\": \"updated_place_id\"\n}"
         },
-        "response": []
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/restaurants/1",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "restaurants", "1"]
+        }
       },
-      {
-        "name": "Create Restaurant",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Authorization",
-              "value": "Bearer {{jwt_token}}",
-              "type": "text"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"name\": \"Test Restaurant\",\n  \"address\": \"123 Main St\",\n  \"google_place_id\": \"test_place_id\"\n}"
+      "response": [],
+      "description": "Endpoint to update details of a specific restaurant by its ID."
+    },
+    {
+      "name": "Add Review",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
           },
-          "url": {
-            "raw": "http://localhost:5000/api/restaurants",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "restaurants"]
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
           }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"restaurant_id\": 1,\n  \"rating\": 5,\n  \"comment\": \"Excellent food!\"\n}"
         },
-        "response": []
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/reviews",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "reviews"]
+        }
       },
-      {
-        "name": "Get Restaurant",
-        "request": {
-          "method": "GET",
-          "header": [
-            {
-              "key": "Authorization",
-              "value": "Bearer {{jwt_token}}",
-              "type": "text"
-            }
-          ],
-          "url": {
-            "raw": "http://localhost:5000/api/restaurants/1",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "restaurants", "1"]
+      "response": [],
+      "description": "Endpoint to add a new review for a restaurant."
+    },
+    {
+      "name": "Get Reviews",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
           }
-        },
-        "response": []
+        ],
+        "url": {
+          "raw": "https://3umdj3p4ce.ap-southeast-2.awsapprunner.com/api/reviews?restaurant_id=1",
+          "protocol": "https",
+          "host": ["3umdj3p4ce.ap-southeast-2.awsapprunner.com"],
+          "path": ["api", "reviews"],
+          "query": [
+            {
+              "key": "restaurant_id",
+              "value": "1"
+            }
+          ]
+        }
       },
-      {
-        "name": "Update Restaurant",
-        "request": {
-          "method": "PUT",
-          "header": [
-            {
-              "key": "Authorization",
-              "value": "Bearer {{jwt_token}}",
-              "type": "text"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"name\": \"Updated Restaurant\",\n  \"address\": \"456 Main St\",\n  \"google_place_id\": \"updated_place_id\"\n}"
-          },
-          "url": {
-            "raw": "http://localhost:5000/api/restaurants/1",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "restaurants", "1"]
-          }
-        },
-        "response": []
-      },
-      {
-        "name": "Add Review",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Authorization",
-              "value": "Bearer {{jwt_token}}",
-              "type": "text"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "type": "text"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"restaurant_id\": 1,\n  \"rating\": 5,\n  \"comment\": \"Excellent food!\"\n}"
-          },
-          "url": {
-            "raw": "http://localhost:5000/api/reviews",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "reviews"]
-          }
-        },
-        "response": []
-      },
-      {
-        "name": "Get Reviews",
-        "request": {
-          "method": "GET",
-          "header": [
-            {
-              "key": "Authorization",
-              "value": "Bearer {{jwt_token}}",
-              "type": "text"
-            }
-          ],
-          "url": {
-            "raw": "http://localhost:5000/api/reviews?restaurant_id=1",
-            "protocol": "http",
-            "host": ["localhost"],
-            "port": "5000",
-            "path": ["api", "reviews"],
-            "query": [
-              {
-                "key": "restaurant_id",
-                "value": "1"
-              }
-            ]
-          }
-        },
-        "response": []
-      }
-    ]
-  }
-  
+      "response": [],
+      "description": "Endpoint to retrieve all reviews for a specific restaurant."
+    }
+  ]
+}
